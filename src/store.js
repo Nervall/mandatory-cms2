@@ -2,7 +2,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export const cart$ = new BehaviorSubject(window.localStorage.getItem('cart') || []);
 
-export function updateCart$(newCart) {
+export function updateCart(newCart) {
   if(!newCart){
     window.localStorage.removeItem('cart');
   }
