@@ -56,3 +56,13 @@ img {
   font-size: 36px;
   color: lightslategray;
 }
+
+.cart-main-container {
+  border: 1px solid grey;
+  padding: 10px;
+  width: 200px;
+}
+
+.checkout-main-container {
+
+}
