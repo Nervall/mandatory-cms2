@@ -12,11 +12,3 @@ export function updateCart(newCart) {
  cart$.next(newCart);
 }
 
-/*
-{
-  name: '',
-  quantity: 0,
-  price: 0,
-  totalPrice: 0
-}
-*/

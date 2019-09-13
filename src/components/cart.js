@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { cart$, updateCart } from '../store.js';
 import Header from './header.js';
@@ -10,9 +10,9 @@ function Cart () {
   let renderCart = (
     cart$.value.map( article => {
       return(
-      <div key={ article.value.name } className="cart-main-container">
-        <p>{ article.value.name }</p>
-        <p>{ article.value.quantity + "st" }</p>
+      <div key={ article.value.product } className="cart-main-container">
+        <p>{ article.value.product }</p>
+        <p>{ article.value.amount + "st" }</p>
         <p>{ article.value.price + " SEK" }</p>
       </div>
       )
@@ -22,7 +22,7 @@ function Cart () {
   const totalPrice = () => {
     let sum = 0;
     for (let price of cart$.value) {
-      sum = sum + parseInt(price.value.price)*parseInt(price.value.quantity);
+      sum = sum + parseInt(price.value.price)*parseInt(price.value.amount);
     }
     return sum;
   }
