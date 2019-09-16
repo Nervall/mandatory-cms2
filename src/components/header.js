@@ -26,7 +26,6 @@ function Header (props) {
   return (
     <header>
       <span className="header-logo-container"><Link to="/"><img className="header-logo" src={ Logo } alt="logo" /></Link></span>
-      <span className="header-button-container"><Link to="/"><button className="header-button">Home</button></Link></span>
       <div className="header-button-digit"><span className="test"><center>{ totalAmount() }</center></span></div>
       <div className="header-cart-container"> <Link to="/cart"><i className="material-icons shoppingCart">shopping_cart</i></Link></div>
       <div className="header-price">{ totalPrice() } kr</div>

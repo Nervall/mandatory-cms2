@@ -7,14 +7,18 @@ function Cart () {
   console.log(cart$.value)
   const [render, updateRender] = useState(true);
 
+  const getRandomId = () => {
+    return Math.floor(Math.random() * 1000000)
+  }
+
   let renderCart = (
     cart$.value.map( article => {
       return(
-      <div key={ article.value.product } className="cart-main-container">
-        <p>{ article.value.product }</p>
-        <p>{ article.value.amount + "st" }</p>
-        <p>{ article.value.price + " SEK" }</p>
-      </div>
+      <tr key={ getRandomId() }>
+        <td>{ article.value.product }</td>
+        <td><center>{ article.value.amount + "st" }</center></td>
+        <td>{ article.value.price + " kr" }</td>
+      </tr>
       )
     })
   )
@@ -32,16 +36,45 @@ function Cart () {
     updateRender(false)
   }
 
+  if (cart$.value.length === 0) {
   return (
     <>
     <Header />
     <main>
-    { renderCart }
+    <h2><i className="material-icons shoppingCart in-table">shopping_cart</i> Varukorg</h2>
+      <p>Du har inga artiklar i din varukorg</p>
     </main>
-    <p>Totalt pris: { totalPrice() } SEK</p>
-    <Link to="/checkout"><button>Till kassan</button></Link><button onClick={ emptyCart }>Töm varukorgen</button>
     </>
   )
+  } else {
+    return (
+      <>
+    <Header />
+    <main>
+    <h2><i className="material-icons shoppingCart in-table">shopping_cart</i> Varukorg</h2>
+    <table>
+        <thead>
+          <tr>
+          <th>Artikel</th>
+          <th><center>Kvantitet</center></th>
+          <th>SEK</th>
+          </tr>
+        </thead>
+        <tbody>
+      { renderCart }
+          <tr>
+            <td></td>
+            <td><center><strong>Totalt:</strong></center></td>
+            <td><strong>{ totalPrice() } kr</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <Link to="/checkout"><button className="cart-checkout-button">Till kassan</button></Link><button className="cart-emptyCart-button" onClick={ emptyCart }>Töm varukorgen</button>
+    </main>
+    
+    </>
+    )
+  }
   
 }
 

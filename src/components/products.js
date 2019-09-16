@@ -54,10 +54,12 @@ function Products () {
       return (
         <Link to={ "/product/" + product._id } key={ product._id } className="products-main-link" >
         <div className="products-main-productcontainer">
+          <center>
           { (product.images || []).map(productImg => <img 
               src={ API._ROOT  + productImg.path } 
               className="products-main-img"
               alt={ product.name } key={ product._id }></img>).slice(0, 1)}
+              </center>
           <h4>{ product.name } </h4>
           <p>{ product.price + " SEK"}</p>
         </div>

@@ -8,7 +8,7 @@ header {
 }
 
 main {
-  margin: 20px;
+  margin: 20px 40px;
 }
 
 button {
@@ -46,7 +46,7 @@ tr {
 }
 
 .products-search-container {
-  margin: 10px 20px;
+  margin: 10px 40px;
 }
 
 .products-checkbox-container {
@@ -56,7 +56,7 @@ tr {
 }
 
 .products-main-img {
-  max-width: 200px;
+  max-width: 100%;
 }
 
 .products-input-search {
@@ -77,9 +77,11 @@ tr {
 
 .products-main-productcontainer {
   width: 210px;
+  height: 300px;
   padding: 10px;
   margin: 15px;
   border: 1px solid #eee;
+  border-radius: 3px;
 }
 
 .products-main-link {
@@ -87,8 +89,8 @@ tr {
   color: #666;
 }
 
-.products-main-link:hover {
-  border: 1px solid #666;
+.products-main-productcontainer:hover {
+  border: 1px solid #ccc;
 } 
 
 .products-button-container {
@@ -191,6 +193,24 @@ tr {
   width: 200px;
 }
 
+.in-table {
+  font-size: 40px;
+  vertical-align: middle;
+}
+
+.cart-checkout-button {
+  margin-top: 40px;
+  background-color: transparent;
+  border: 1px solid #e4458f;
+  color: #e4458f;
+}
+
+.cart-emptyCart-button {
+  background-color: transparent;
+  border: 0;
+  margin-left: 10px;
+}
+
 
 /* ====== FORM ======= */
 
@@ -269,43 +289,6 @@ textarea {
 .react-rater:active { color: #000 } /* color of star rated */
 
 
-
-/* ====== HEADER NAV ======= */
-.header-sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.-header-sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-.header-sidenav a:hover {
-  color: #f1f1f1;
-}
-
-.header-sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-
 /* ====== HEADER ======= */
 
 .header-button-container {
@@ -320,6 +303,7 @@ textarea {
 
 .header-logo {
   width: 200px;
+  margin-left: 10px;
 }
 
 .header-cart-container {
