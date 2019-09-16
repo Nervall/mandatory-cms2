@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Products from "./components/products.js";
 import Product from "./components/product.js";
@@ -7,6 +7,7 @@ import Cart from "./components/cart.js";
 import Confirm from "./components/confirm.js";
 
 function App() {
+  //const [redirect, updateRedirect] = useState(false)
   return (
     <Router>
       <Route exact path="/" component={ Products } />
@@ -19,3 +20,5 @@ function App() {
 }
 
 export default App;
+
+//<Route path='/checkout' component={() => <Checkout redirect={redirect} updateRedirect={updateRedirect} />} />
