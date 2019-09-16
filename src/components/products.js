@@ -15,17 +15,16 @@ function Products () {
 
   useEffect(() => {
     const pagination = '&limit=4&skip=' + skip;
-    if (isChecked === true){
+    if (isChecked){
        updateIsInStock('&filter[stock]=true')
-    } else {
-       updateIsInStock('');
-    }
+    } 
     if (search) {
       updateValue('&filter[name][$regex]=' + search)
-    } else {
+    } 
+    else {
       updateValue('');
     }
-    axios.get(API._ROOT + API._PRODUCTS + API.TOKEN + pagination + value + isInStock) 
+    axios.get(API._ROOT + API._PRODUCTS + API.TOKEN + pagination + isInStock + value) 
       .then((response) => {
         console.log(response.data.entries)
         updateData(response.data.entries)
@@ -43,7 +42,7 @@ function Products () {
   }
 
   const handleSearch = (e) => {
-    updateSearch(e.target)
+    updateSearch(e.target.value)
   }
 
   const inStock = (e) => {
@@ -81,7 +80,7 @@ function Products () {
     <main className="products-main-container">
     { renderProducts }
     </main>
-    <button onClick={ handleBack }>Back</button><button onClick={ handleNext }>Next</button>
+    <div className="products-button-container"><button className="products-button" onClick={ handleBack }>Back</button><button className="products-button" onClick={ handleNext }>Next</button></div>
     <footer></footer>
     </>
   )

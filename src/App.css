@@ -4,7 +4,7 @@
 header {
   position: relative;
   width: 100%;
-  height: 100px;
+  height: 170px;
 }
 
 main {
@@ -26,6 +26,18 @@ button:hover {
   opacity: 1;
 }
 
+table {
+  width: 450px;
+}
+
+th {
+  height: 40px;
+  text-align: left;
+}
+
+tr {
+  height: 30px;
+}
 
 /* ====== PRODUCTS ======= */
 .products-main-container {
@@ -78,6 +90,17 @@ button:hover {
 .products-main-link:hover {
   border: 1px solid #666;
 } 
+
+.products-button-container {
+  margin-left: 20px;
+}
+
+.products-button {
+  background-color: transparent;
+  border: 1px solid #e4458f;
+  color: #e4458f;
+  margin: 0 5px;
+}
 
 /* ====== PRODUCT ======= */
 
@@ -290,6 +313,15 @@ textarea {
   margin: 60px 0 0 20px;
 }
 
+.header-button {
+  background-color: transparent;
+  border: 1px solid #666;
+}
+
+.header-logo {
+  width: 200px;
+}
+
 .header-cart-container {
   position: absolute;
   top: 20px;
@@ -320,3 +352,12 @@ textarea {
   position: relative;
   top: 3px;
 }
+
+/* ====== CHECKOUT ======= */
+.checkout-input-container {
+  width: 450px;
+}
+
+.checkout-button {
+  margin-top: 10px;
+} 

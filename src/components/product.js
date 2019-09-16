@@ -58,7 +58,7 @@ function Product (props) {
     updateCart([...cart$.value, cart])
     updateProductQuantity(0);
     updateCartMess('Tillagd i varukorg')
-    setTimeout(() => {
+    setInterval(() => {
       updateCartMess('')
     }, 2000); 
   }

@@ -7,6 +7,7 @@ import Header from './header.js';
 
 function Checkout () {
   const [orderName, updateOrderName] = useState('');
+  const [errorMess, updateErrorMess] = useState('')
   const [orderAdress, updateOrderAdress] = useState('');
   const [orderTotalPrice, updateOrderTotalPrice] = useState(0);
   console.log(cart$.value)
@@ -24,8 +25,8 @@ function Checkout () {
       return(
           <tr>
           <td>{ article.value.product }</td>
-          <td>{ article.value.amount }</td>
-          <td>{ article.value.price }</td>
+          <td><center>{ article.value.amount }</center></td>
+          <td>{ article.value.price } kr</td>
           </tr>
       )
     })
@@ -48,22 +49,32 @@ function Checkout () {
     } 
 
   let sendOrder = () => {
+    if (!orderName || !orderAdress) {
+      updateErrorMess('Du måste fylla i formuläret');
+      return;
+    } else if (cart$.value === []) {
+      updateErrorMess('Det finna inga varor i varukorgen')
+      return;
+    } else {
     axios.post(API._ROOT + API._SEND_ORDER + API.TOKEN,
       {data: order})
-  .then((response) => {
-    console.log(response);
-  })
+      .then((response) => {
+        console.log(response);
+        updateCart([])
+      })
+    }
   }
 
   return (
     <>
     <Header />
+    <main>
     <h3>Din beställning</h3>
     <table className="checkout-main-container">
         <thead>
           <tr>
           <th>Artikel</th>
-          <th>Kvantitet</th>
+          <th><center>Kvantitet</center></th>
           <th>SEK</th>
           </tr>
         </thead>
@@ -71,17 +82,22 @@ function Checkout () {
       { renderCart }
           <tr>
             <td></td>
-            <td>Totalt: </td>
-            <td>{ orderTotalPrice }</td>
+            <td><center><strong>Totalt:</strong></center></td>
+            <td><strong>{ orderTotalPrice } kr</strong></td>
           </tr>
         </tbody>
       </table>
       <h3>Skickas till</h3>
       <form>
-        <input type="text" name="name" placeholder="namn" onChange={ getName }></input><br />
-        <input type="text" name="adress" placeholder="adress" onChange={ getAdress }></input><br />
-        <Link to="/confirm"><button onClick={ sendOrder }>Skicka</button></Link>
+        <div className="checkout-input-container">
+        <input type="text" name="name" placeholder="Namn" onChange={ getName } required></input><br />
+        <input type="text" name="adress" placeholder="adress" onChange={ getAdress } required></input><br />
+        </div>
+        <button onClick={ sendOrder } className="checkout-button">Skicka Order<Link to="/confirm"> </Link></button>
       </form>
+      <p>{ errorMess }</p>
+      </main>
+
     </>
   )
   
