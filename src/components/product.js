@@ -27,6 +27,14 @@ function Product (props) {
       console.log(response.data.entries);
       updateData(response.data.entries);
     })
+    .catch((error) => {
+      if (axios.isCancel(error)) {
+        return;
+      }
+      if (error) {
+        console.log(error)
+      }
+    })
   }, [id]);
 
   useEffect(() => {
@@ -34,6 +42,14 @@ function Product (props) {
   .then((response) => {
     console.log(response.data.entries);
     updateReviews(response.data.entries)
+  })
+  .catch((error) => {
+    if (axios.isCancel(error)) {
+      return;
+    }
+    if (error) {
+      console.log(error)
+    }
   })
 }, [id]);
 
@@ -83,6 +99,14 @@ function Product (props) {
       updateReviewMess('')
     }, 2000); 
     updateRender(true)
+  })
+  .catch((error) => {
+    if (axios.isCancel(error)) {
+      return;
+    }
+    if (error) {
+      console.log(error)
+    }
   })
   }
   }

@@ -34,6 +34,14 @@ function Products () {
         updateTotalPost(response.data.total)
         updateData(response.data.entries)
       })
+      .catch((error) => {
+        if (axios.isCancel(error)) {
+          return;
+        }
+        if (error) {
+          console.log(error)
+        }
+      })
   }, [skip, search, value, isChecked, isInStock]);
 
   useEffect( () => {

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { API } from './api.js';
 import Header from './header.js';
 
-function Checkout (props) {
+function Checkout () {
   const [orderName, updateOrderName] = useState('');
   const [errorMess, updateErrorMess] = useState('')
   const [orderAdress, updateOrderAdress] = useState('');
@@ -13,15 +13,7 @@ function Checkout (props) {
   //const [orderTotalPrice, updateOrderTotalPrice] = useState(0);
  
   console.log(cart$.value)
-/*
-  useEffect(() => {
-    let sum = 0;
-    for (let price of cart$.value) {
-      sum = sum + parseInt(price.value.price)*parseInt(price.value.amount);
-    }
-    updateOrderTotalPrice(sum)
-  }, [])
-*/
+
   const totalPrice = () => {
     let sum = 0;
     for (let price of cart$.value) {
@@ -62,14 +54,8 @@ function Checkout (props) {
       list: cart$.value 
     } 
 
-/*
-if (!orderName || !orderAdress) {
-      updateErrorMess('Du måste fylla i formuläret');
-      return;
-    }
-    */
-
-  let sendOrder = () => {
+  let sendOrder = (e) => {
+    e.preventDefault();
     if (!orderName || !orderAdress) {
       updateErrorMess('Du måste fylla i formuläret');
       return;
@@ -79,10 +65,17 @@ if (!orderName || !orderAdress) {
       .then((response) => {
         console.log(response);
       })
+      .catch((error) => {
+        if (axios.isCancel(error)) {
+          return;
+        }
+        if (error) {
+          console.log(error)
+        }
+      })
       updateRedirect(true)
       updateCart([])
   }
-
 
   if (redirect) {
     return (
@@ -95,30 +88,30 @@ if (!orderName || !orderAdress) {
     <main>
     <h2>Ditt Köp</h2>
     <table className="checkout-main-container">
-        <thead>
+      <thead>
           <tr>
           <th>Artikel</th>
           <th><center>Kvantitet</center></th>
           <th>SEK</th>
           </tr>
-        </thead>
-        <tbody>
-      { renderCart }
+      </thead>
+      <tbody>
+          { renderCart }
           <tr>
             <td></td>
             <td><center><strong>Totalt:</strong></center></td>
             <td><strong>{ totalPrice() } kr</strong></td>
           </tr>
-        </tbody>
-      </table>
+      </tbody>
+    </table>
       <h3>Skickas till</h3>
-      <form>
-        <div className="checkout-input-container">
+      <div className="checkout-input-container">
+      <form onSubmit={ sendOrder }>
         <input type="text" name="name" placeholder="Namn" onChange={ getName } required></input><br />
         <input type="text" name="adress" placeholder="adress" onChange={ getAdress } required></input><br />
-        </div>
-        <button onClick={ sendOrder } className="checkout-button">Skicka Order</button>
+        <button className="checkout-button">Skicka Order</button>
       </form>
+      </div>
       <p>{ errorMess }</p>
       </main>
     </>
