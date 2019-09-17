@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { API } from './api.js';
 import { cart$, updateCart } from '../store.js';
@@ -19,6 +19,8 @@ function Product (props) {
   const [ commentGrade, updateCommentGrade ] = useState(5);
   const [ errorMess, updateErrorMess ] = useState('');
   const [ cartMess, updateCartMess ] = useState('');
+  const inputName = useRef(null);
+  const inputComment = useRef(null);
   const id = props.match.params.id;
 
   useEffect(() => {
@@ -99,9 +101,8 @@ function Product (props) {
         setTimeout(() => {
           updateReviewMess('')
         }, 2000); 
-        updateCommentName('');
-        updateCommentText('');
-        updateCommentGrade(5);
+        inputName.current.value = '';
+        inputComment.current.value = '';
         updateRender(true)
       })
       .catch((error) => {
@@ -191,8 +192,8 @@ function Product (props) {
       <p>Inga recensioner</p>
       <div className="product-writereview-container">
       <h4 >Skriv en recension</h4>
-      <input type="text" name="Namn" placeholder="Rubrik" onChange={commentNameValue} required></input><br />
-      <textarea type="text" name="comment" placeholder="Din kommentar" onChange={commentTextValue} required></textarea><br />
+      <input type="text" name="Namn" placeholder="Rubrik" ref={ inputName } onChange={commentNameValue} required></input><br />
+      <textarea type="text" name="comment" placeholder="Din kommentar" ref={ inputComment } onChange={commentTextValue} required></textarea><br />
       <p>Betyg</p>
       <div className="range-container">
       <input type="range" className="range-slider" name="rating" min="0" max="5" step="1" onChange={commentRatingValue} required></input><br />
@@ -218,8 +219,8 @@ function Product (props) {
       { renderReview }
       <div className="product-writereview-container">
       <h4 >Skriv en recension</h4>
-      <input type="text" name="Namn" placeholder="Rubrik" onChange={commentNameValue} required></input><br />
-      <textarea type="text" name="comment" placeholder="Din kommentar" onChange={commentTextValue} required></textarea><br />
+      <input type="text" name="Namn" placeholder="Rubrik" ref={ inputName } onChange={commentNameValue} required></input><br />
+      <textarea type="text" name="comment" placeholder="Din kommentar" ref={ inputComment } onChange={commentTextValue} required></textarea><br />
       <p>Betyg</p>
       <div className="range-container">
       <input type="range" className="range-slider" name="rating" min="0" max="5" step="1" onChange={commentRatingValue} required></input><br />
