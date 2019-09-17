@@ -138,18 +138,47 @@ function Product (props) {
     })
   )
 
+  
   let renderReview = (
     reviews.map( review => {
-      return(
+      return (
         <div key={ getRandomId() } className="product-review-container">
           <Rater className="product-review-rater" total={Number(review.rating)} interactive={false}></Rater>
           <p><strong>{ review.titel }</strong></p>
           <p>{ review.body }</p> 
         </div>
       )
-    })
+    }) 
   )
-   
+
+  if (reviews.length === 0) {
+    return (
+      <>
+    <Header />
+      <main className="product-container">
+      { renderGallery }
+      <div className="product-content-container">
+      { renderProduct }
+      <h4 className="product-review-heading">Recensioner</h4>
+      <p>Inga recensioner</p>
+      <div className="product-writereview-container">
+      <h4 >Skriv en recension</h4>
+      <input type="text" name="Namn" placeholder="Rubrik" onChange={commentNameValue} required></input><br />
+      <textarea type="text" name="comment" placeholder="Din kommentar" onChange={commentTextValue} required></textarea><br />
+      <p>Betyg</p>
+      <div className="range-container">
+      <input type="range" className="range-slider" name="rating" min="0" max="5" step="1" onChange={commentRatingValue} required></input><br />
+      </div>
+      <button className="product-button-review" onClick={ sendComment }>Skicka recension</button>
+      <div>{ reviewMess }</div>
+      <p>{ errorMess }</p>
+      </div>
+      </div>
+      </main>
+    <Footer />
+    </>
+    )
+  }
   return (
     <>
     <Header />

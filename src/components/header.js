@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { cart$, updateCart } from '../store.js';
+import { cart$ } from '../store.js';
 import Logo from '../img/sneakers.png';
 
 import "../App.css";

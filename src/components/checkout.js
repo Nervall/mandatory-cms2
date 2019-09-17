@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { cart$, updateCart } from '../store.js';
 import { Redirect } from "react-router-dom";
 import axios from 'axios';

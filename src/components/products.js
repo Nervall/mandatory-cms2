@@ -31,7 +31,6 @@ function Products () {
     axios.get(API._ROOT + API._PRODUCTS + API.TOKEN + pagination + isInStock + value) 
       .then((response) => {
         console.log(response.data.entries)
-        console.log(response.data.total)
         updateTotalPost(response.data.total)
         updateData(response.data.entries)
       })
@@ -55,16 +54,13 @@ function Products () {
 
   const handleBack = () => {
     updateSkip(skip-10)
-    console.log(skip)
   }
 
   const handleNext = () => {
     updateSkip(skip+10)
-    console.log(skip)
   }
 
   const handleSearch = (e) => {
-    console.log(e.target.value)
     updateSearch(e.target.value)
   }
 
@@ -91,7 +87,9 @@ function Products () {
     })
   )
   
-
+  if (data === null) {
+    return (<p>Loading...</p>)
+  }
   return (
     <>
     <Header />
@@ -106,8 +104,8 @@ function Products () {
     { renderProducts }
     </main>
     <div className="products-button-container">
-      <button className="products-button"  disabled={ disableBack } onClick={ handleBack }><i class="material-icons">chevron_left</i></button>
-      <button className="products-button" disabled={ disableNext } onClick={ handleNext }><i class="material-icons">chevron_right</i></button></div>
+      <button className="products-button"  disabled={ disableBack } onClick={ handleBack }><i className="material-icons">chevron_left</i></button>
+      <button className="products-button" disabled={ disableNext } onClick={ handleNext }><i className="material-icons">chevron_right</i></button></div>
     <Footer />
     </>
   )
