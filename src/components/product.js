@@ -16,7 +16,7 @@ function Product (props) {
   const [ productQuantity, updateProductQuantity ] = useState(1);
   const [ commentName, updateCommentName ] = useState('');
   const [ commentText, updateCommentText ] = useState('');
-  const [ commentGrade, updateCommentGrade ] = useState(0);
+  const [ commentGrade, updateCommentGrade ] = useState(5);
   const [ errorMess, updateErrorMess ] = useState('');
   const [ cartMess, updateCartMess ] = useState('');
   const id = props.match.params.id;
@@ -51,7 +51,7 @@ function Product (props) {
       console.log(error)
     }
   })
-}, [id]);
+}, [id, render]);
 
   const getRandomId = () => {
     return Math.floor(Math.random() * 1000000)
@@ -78,7 +78,8 @@ function Product (props) {
   }
 }
 
-  let sendComment = () => {
+  let sendComment = (e) => {
+    e.preventDefault();
     if (!commentName || !commentText|| !commentGrade) {
       updateErrorMess('Du måste fylla i hela formuläret')
       return null;
@@ -91,24 +92,27 @@ function Product (props) {
         productlink: { _id: id } 
       } 
     })
-  .then((response) => {
-    console.log(response);
-    updateErrorMess('')
-    updateReviewMess("Skickat")
-    setTimeout(() => {
-      updateReviewMess('')
-    }, 2000); 
-    updateRender(true)
-  })
-  .catch((error) => {
-    if (axios.isCancel(error)) {
-      return;
+      .then((response) => {
+        console.log(response);
+        updateErrorMess('')
+        updateReviewMess("Skickat")
+        setTimeout(() => {
+          updateReviewMess('')
+        }, 2000); 
+        updateCommentName('');
+        updateCommentText('');
+        updateCommentGrade(5);
+        updateRender(true)
+      })
+      .catch((error) => {
+        if (axios.isCancel(error)) {
+          return;
+        }
+        if (error) {
+          console.log(error)
+        }
+      })
     }
-    if (error) {
-      console.log(error)
-    }
-  })
-  }
   }
 
   let commentNameValue = (e) => {
