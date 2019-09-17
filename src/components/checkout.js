@@ -70,6 +70,10 @@ if (!orderName || !orderAdress) {
     */
 
   let sendOrder = () => {
+    if (!orderName || !orderAdress) {
+      updateErrorMess('Du måste fylla i formuläret');
+      return;
+    }
     axios.post(API._ROOT + API._SEND_ORDER + API.TOKEN,
       {data: order})
       .then((response) => {

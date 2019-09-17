@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API } from "./api.js"
-import Header from "./header.js"
+import { API } from "./api.js";
+import Header from "./header.js";
+import Footer from "./footer.js";
 import "../App.css"
 
 function Products () {
@@ -10,11 +11,14 @@ function Products () {
   const [ skip, updateSkip ] = useState(0);
   const [ search, updateSearch ] = useState('');
   const [ value, updateValue ] = useState();
+  const [ totalPost, updateTotalPost ] = useState(0);
+  const [ disableBack, updateDisableBack ] = useState(true);
+  const [ disableNext, updateDisableNext ] = useState(false);
   const [ isChecked, updateIsChecked ] = useState(false);
   const [ isInStock, updateIsInStock ] = useState()
 
   useEffect(() => {
-    const pagination = '&limit=4&skip=' + skip;
+    const pagination = '&limit=10&skip=' + skip;
     if (isChecked){
        updateIsInStock('&filter[stock]=true')
     } 
@@ -27,21 +31,40 @@ function Products () {
     axios.get(API._ROOT + API._PRODUCTS + API.TOKEN + pagination + isInStock + value) 
       .then((response) => {
         console.log(response.data.entries)
+        console.log(response.data.total)
+        updateTotalPost(response.data.total)
         updateData(response.data.entries)
       })
   }, [skip, search, value, isChecked, isInStock]);
 
+  useEffect( () => {
+    if (skip === 0) {
+      updateDisableBack(true);
+      updateDisableNext(false)
+    }
+    else if (skip > totalPost-10) {
+      updateDisableNext(true);
+      updateDisableBack(false)
+    }
+    else {
+      updateDisableBack(false)
+      updateDisableNext(false)
+    }
+  },[skip, totalPost]
+  );
+
   const handleBack = () => {
-    updateSkip(skip-4)
+    updateSkip(skip-10)
     console.log(skip)
   }
 
   const handleNext = () => {
-    updateSkip(skip+4)
+    updateSkip(skip+10)
     console.log(skip)
   }
 
   const handleSearch = (e) => {
+    console.log(e.target.value)
     updateSearch(e.target.value)
   }
 
@@ -82,8 +105,10 @@ function Products () {
     <main className="products-main-container">
     { renderProducts }
     </main>
-    <div className="products-button-container"><button className="products-button" onClick={ handleBack }>Back</button><button className="products-button" onClick={ handleNext }>Next</button></div>
-    <footer></footer>
+    <div className="products-button-container">
+      <button className="products-button"  disabled={ disableBack } onClick={ handleBack }><i class="material-icons">chevron_left</i></button>
+      <button className="products-button" disabled={ disableNext } onClick={ handleNext }><i class="material-icons">chevron_right</i></button></div>
+    <Footer />
     </>
   )
   

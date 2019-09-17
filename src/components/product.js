@@ -3,6 +3,7 @@ import axios from 'axios';
 import { API } from './api.js';
 import { cart$, updateCart } from '../store.js';
 import Header from "./header.js";
+import Footer from "./footer.js";
 import Rater from 'react-rater';
 import "../App.css";
 //const ReactMarkdown = require('react-markdown');
@@ -58,9 +59,6 @@ function Product (props) {
     updateCart([...cart$.value, cart])
     updateProductQuantity(0);
     updateCartMess('Tillagd i varukorg')
-    setInterval(() => {
-      updateCartMess('')
-    }, 2000); 
   }
 }
 
@@ -147,7 +145,6 @@ function Product (props) {
           <Rater className="product-review-rater" total={Number(review.rating)} interactive={false}></Rater>
           <p><strong>{ review.titel }</strong></p>
           <p>{ review.body }</p> 
-          { render }
         </div>
       )
     })
@@ -176,7 +173,7 @@ function Product (props) {
       </div>
       </div>
       </main>
-    <footer></footer>
+    <Footer />
     </>
   )
   
