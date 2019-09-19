@@ -119,9 +119,11 @@ tr {
 /* ====== PRODUCT ======= */
 
 .product-container {
+  margin:60 30px;
   display: flex;
   flex-flow: row wrap;
-  margin: 0 30px;
+  align-items: flex-start;
+  padding-top: 40px;
 }
 
 .product-image-container {
@@ -132,13 +134,12 @@ tr {
 
 .product-image {
   max-width: 500px;
-  margin: 5px 0;
 }
 
 .product-content-container {
   max-width: 500px;
   min-width: 400px;
-  padding: 40px;
+  padding: 0 40px;
   display: flex;
   flex-direction: column;
 }
@@ -361,9 +362,6 @@ textarea {
   margin-top: 10px;
 } 
 
-
-
-
 .sidenav {
   height: 100%;
   width: 0;
@@ -395,4 +393,8 @@ textarea {
   font-size: 36px;
   margin-left: 50px;
   z-index: 3;
+}
+
+.product-carousell-container {
+  max-width: 500px;
 }

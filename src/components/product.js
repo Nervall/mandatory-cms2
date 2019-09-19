@@ -5,6 +5,7 @@ import { cart$, updateCart } from '../store.js';
 import Header from "./header.js";
 import Footer from "./footer.js";
 import Rater from 'react-rater';
+import Carousell from "./carousell.js"
 import "../App.css";
 //const ReactMarkdown = require('react-markdown');
 
@@ -166,7 +167,6 @@ function Product (props) {
       )
     })
   )
-
   
   let renderReview = (
     reviews.map( review => {
@@ -179,13 +179,13 @@ function Product (props) {
       )
     }) 
   )
-
+//<Carousell paramId={ id } data={ data }/>
   if (reviews.length === 0) {
     return (
       <>
     <Header />
       <main className="product-container">
-      { renderGallery }
+      <Carousell paramId={ id } data={ data }/>
       <div className="product-content-container">
       { renderProduct }
       <h4 className="product-review-heading">Recensioner</h4>
@@ -212,7 +212,7 @@ function Product (props) {
     <>
     <Header />
       <main className="product-container">
-      { renderGallery }
+      <Carousell paramId={ id } data={ data }/>
       <div className="product-content-container">
       { renderProduct }
       <h4 className="product-review-heading">Recensioner</h4>
