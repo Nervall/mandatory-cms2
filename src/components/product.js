@@ -154,7 +154,7 @@ function Product (props) {
       )
     })
   )
-
+/*
   let renderGallery = (
     data.map( product => {
       return(
@@ -167,7 +167,7 @@ function Product (props) {
       )
     })
   )
-  
+  */
   let renderReview = (
     reviews.map( review => {
       return (
@@ -185,7 +185,7 @@ function Product (props) {
       <>
     <Header />
       <main className="product-container">
-      <Carousell paramId={ id } data={ data }/>
+      <Carousell data={ data }/>
       <div className="product-content-container">
       { renderProduct }
       <h4 className="product-review-heading">Recensioner</h4>
@@ -212,7 +212,7 @@ function Product (props) {
     <>
     <Header />
       <main className="product-container">
-      <Carousell paramId={ id } data={ data }/>
+      <Carousell data={ data }/>
       <div className="product-content-container">
       { renderProduct }
       <h4 className="product-review-heading">Recensioner</h4>

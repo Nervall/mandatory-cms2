@@ -6,7 +6,6 @@ import "../App.css";
 function Carousell(props) {
   const [ index, updateIndex ] = useState(0);
   const data = props.data;
-  const id = props.paramId
 
   let arr = []
 
